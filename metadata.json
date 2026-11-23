@@ -1,0 +1,6 @@
+{
+  "name": "Joineazy",
+  "description": "Role-based student group formation, two-step OneDrive assignment submission verification, and real-time professor analytics dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
