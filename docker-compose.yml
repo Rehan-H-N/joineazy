@@ -1,0 +1,26 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: joineazy-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  app:
+    build: .
+    container_name: joineazy-app
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/joineazy
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production-min-32-chars}
+
+volumes:
+  mongo_data:

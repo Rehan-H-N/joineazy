@@ -12,3 +12,6 @@ data/
 
 data/
 .playwright-cli/
+
+.aistudio/
+public/assets/aistudio/
