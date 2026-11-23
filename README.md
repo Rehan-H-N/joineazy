@@ -1,10 +1,10 @@
-# Joineazy — Student, Group & Assignment Management System
+Joineazy — Student, Group & Assignment Management System
 
 A role-based full-stack web application built with **React, Tailwind CSS, Node.js, Express, MongoDB (Mongoose), WebSockets, and Docker**. Students form project groups (strictly capped at 4 members with per-task uniqueness), collaborate in real time, and confirm external OneDrive assignment uploads via two-step verification, while professors manage group/individual assignments, monitor live progress, view analytics, and grade submissions.
 
 ---
 
-## 1. Overview of Implementation
+ 1. Overview of Implementation
 
 - **Role-Based Access Control (JWT)**:
   - **Student Role**: Register/sign in, browse eligible assignments (group & individual), open validated OneDrive submission links, create groups, invite/add teammates by Gmail or Student ID (max 4 per group, no student repeated across different groups for the same assignment), post real-time collaboration notes/milestones, confirm submission via two-step verification (`"Yes, I have submitted"` → `"Confirm Final Submission"`), and track personal/group progress bars.
@@ -17,21 +17,21 @@ A role-based full-stack web application built with **React, Tailwind CSS, Node.j
 
 ---
 
-## 2. Folder Structure
+ 2. Folder Structure
 
 ```text
 ├── backend/
-│   ├── app.ts                    # Express app factory & security middleware
+│   ├── app.ts                    / Express app factory & security middleware
 │   ├── config/
 │   ├── db/
-│   │   ├── repository.ts         # Mongoose MongoDB + embedded persistent store fallback
-│   │   └── seedData.ts           # Deterministic academic seed data
+│   │   ├── repository.ts         / Mongoose MongoDB + embedded persistent store fallback
+│   │   └── seedData.ts           / Deterministic academic seed data
 │   ├── middleware/
-│   │   └── auth.ts               # JWT verification, RBAC guards, NoSQL operator blocker
+│   │   └── auth.ts               /JWT verification, RBAC guards, NoSQL operator blocker
 │   ├── models/
-│   │   └── schemas.ts            # Mongoose Schemas (User, Assignment, Group, Submission)
+│   │   └── schemas.ts            / Mongoose Schemas (User, Assignment, Group, Submission)
 │   ├── realtime/
-│   │   └── wsServer.ts           # Authenticated WebSocket hub
+│   │   └── wsServer.ts           /Authenticated WebSocket hub
 │   └── routes/
 │       ├── analyticsRoutes.ts
 │       ├── assignmentRoutes.ts
@@ -39,7 +39,7 @@ A role-based full-stack web application built with **React, Tailwind CSS, Node.j
 │       ├── groupRoutes.ts
 │       ├── studentRoutes.ts
 │       └── submissionRoutes.ts
-├── src/                          # React + Tailwind CSS Frontend
+├── src/                          / React + Tailwind CSS Frontend
 │   ├── components/
 │   │   ├── AuthScreen.tsx
 │   │   ├── LayoutShell.tsx
@@ -49,20 +49,20 @@ A role-based full-stack web application built with **React, Tailwind CSS, Node.j
 │   ├── context/
 │   │   └── AuthContext.tsx
 │   ├── shared/
-│   │   ├── rules.ts              # Pure domain validation & progress math
-│   │   └── rules.test.ts         # Node test suite (node:test)
+│   │   ├── rules.ts              / Pure domain validation & progress math
+│   │   └── rules.test.ts         / Node test suite (node:test)
 │   └── types/
 │       └── api.ts
-├── server.ts                     # Unified HTTP + WebSocket + Vite/Static server
+├── server.ts                     / Unified HTTP + WebSocket + Vite/Static server
 ├── Dockerfile
 └── docker-compose.yml
 ```
 
 ---
 
-## 3. Setup & Run Instructions
+ 3. Setup & Run Instructions
 
-### Local Development
+ **Local Development**
 1. Install dependencies:
    ```bash
    npm install
@@ -81,7 +81,7 @@ A role-based full-stack web application built with **React, Tailwind CSS, Node.j
    npm run dev
    ```
 
-### Docker Compose (App + MongoDB 7)
+ Docker Compose (App + MongoDB 7)
 ```bash
 docker compose up --build
 ```
@@ -89,7 +89,7 @@ The application will be available at `http://localhost:3000` backed by `mongodb:
 
 ---
 
-## 4. REST API Endpoints
+ 4. REST API Endpoints
 
 | Method | Endpoint | Role | Description |
 | :--- | :--- | :--- | :--- |
@@ -116,7 +116,7 @@ The application will be available at `http://localhost:3000` backed by `mongodb:
 
 ---
 
-## 5. Database Schema & Entity-Relationship Diagram
+ 5. Database Schema & Entity-Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -184,7 +184,7 @@ erDiagram
 
 ---
 
-## 6. Architecture Overview
+ 6. Architecture Overview
 
 ```text
 React 19 SPA (Tailwind CSS)
@@ -203,7 +203,7 @@ Express + Node HTTP Server (port 3000)
 
 ---
 
-## 7. Key Design & Deployment Decisions
+ 7. Key Design & Deployment Decisions
 
 1. **Dual-Mode Persistence**: Uses real Mongoose schemas and MongoDB queries whenever `MONGODB_URI` is provided (including via `docker-compose.yml`), while transparently falling back to an atomic persistent JSON store in environments without a running `mongod` daemon.
 2. **Server-Side Privacy Projection**: Students never receive professor personal attributes (`email`, `age`, `phone`, `officeRoom`, `facultyId`), enforced at the API serialization layer via `stripProfessorPersonalData`.
